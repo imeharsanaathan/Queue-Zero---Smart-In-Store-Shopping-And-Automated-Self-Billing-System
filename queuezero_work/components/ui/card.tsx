@@ -1,1 +1,0 @@
-import * as React from 'react'; import {cx} from '@/lib/utils'; export const Card=({className='',...p}:React.HTMLAttributes<HTMLDivElement>)=><div className={cx('rounded-2xl border border-slate-100 bg-white shadow-sm',className)} {...p}/>;

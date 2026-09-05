@@ -1,2 +1,0 @@
-import {cookies} from 'next/headers'; import {redirect} from 'next/navigation'; import {userFromSession} from '@/lib/db'; import CartClient from './cart-client';
-export default async function CartPage(){const c=await cookies();if(!(await userFromSession(c.get('qz_session')?.value)))redirect('/login');if(!c.get('qz_city')?.value)redirect('/city');if(!c.get('qz_store')?.value)redirect('/store');return <CartClient/>}
