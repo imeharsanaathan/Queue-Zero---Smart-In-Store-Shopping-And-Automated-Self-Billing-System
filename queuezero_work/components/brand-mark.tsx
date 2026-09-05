@@ -1,0 +1,1 @@
+export function BrandMark({dark=false,compact=false}:{dark?:boolean;compact?:boolean}){return <img src="/queuezero-logo.svg" alt="QueueZero — Shop smart, skip the queue" className={compact?'h-9 w-[145px] object-contain object-left':'h-12 w-[210px] object-contain object-left'}/>}
