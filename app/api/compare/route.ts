@@ -1,0 +1,2 @@
+import { NextResponse } from 'next/server'; import { allProducts } from '@/lib/data';
+export async function GET(req:Request){ const id=new URL(req.url).searchParams.get('product'); const p=allProducts.find(x=>x.id===id); if(!p) return NextResponse.json({error:'Product not found'},{status:404}); const entries=Object.entries(p.compare).sort((a,b)=>a[1]-b[1]); return NextResponse.json({product:p.id,lowest:entries[0]?.[0],prices:entries}); }
