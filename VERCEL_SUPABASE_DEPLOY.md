@@ -73,3 +73,7 @@ Test this sequence on the public Vercel URL:
 ## Payment note
 
 The current QueueZero payment flow is a simulated/demo payment action. It does not charge real cards or UPI accounts, which is appropriate for a college project demonstration.
+
+
+### If Vercel previously failed on TypeScript
+This version includes the Supabase client typing fix and a local declaration for canvas-confetti so the production build can complete on Vercel.

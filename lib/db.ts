@@ -42,7 +42,7 @@ export function verifyPassword(password:string,hash:string,salt:string){
 }
 
 export async function createUser(input:{name:string;email?:string;phone?:string;password:string}){
-  const db=getSupabaseAdmin();
+  const db:any=getSupabaseAdmin();
   const email=emailKey(input.email),phone=phoneKey(input.phone);
   if(!input.name.trim()) throw new Error('Full name is required.');
   if(!input.password||input.password.length<8) throw new Error('Password must be at least 8 characters.');
@@ -59,7 +59,7 @@ export async function createUser(input:{name:string;email?:string;phone?:string;
 }
 
 export async function loginUser(input:{email?:string;phone?:string;password:string}){
-  const db=getSupabaseAdmin();
+  const db:any=getSupabaseAdmin();
   const email=emailKey(input.email),phone=phoneKey(input.phone);
   try {
     let query=db.from('qz_users').select('id,name,email,phone,password_hash,salt,created_at');
@@ -73,7 +73,7 @@ export async function loginUser(input:{email?:string;phone?:string;password:stri
 }
 
 export async function createSession(userId:string){
-  const db=getSupabaseAdmin();
+  const db:any=getSupabaseAdmin();
   const token=crypto.randomBytes(32).toString('hex');
   const expiresAt=new Date(Date.now()+30*86400000).toISOString();
   try {
@@ -86,7 +86,7 @@ export async function createSession(userId:string){
 
 export async function userFromSession(token?:string){
   const userId=await userIdFromSession(token); if(!userId)return null;
-  const db=getSupabaseAdmin();
+  const db:any=getSupabaseAdmin();
   const {data,error}=await db.from('qz_users').select('id,name,email,phone,password_hash,salt,created_at').eq('id',userId).maybeSingle();
   if(error)fail('Session user lookup failed',error);
   return data?safeUser(toUser(data as UserRow)):null;
@@ -94,7 +94,7 @@ export async function userFromSession(token?:string){
 
 export async function userIdFromSession(token?:string){
   if(!token)return null;
-  const db=getSupabaseAdmin();
+  const db:any=getSupabaseAdmin();
   await db.from('qz_sessions').delete().lt('expires_at',now().toISOString());
   const {data,error}=await db.from('qz_sessions').select('user_id').eq('token',token).gt('expires_at',now().toISOString()).maybeSingle();
   if(error)fail('Session lookup failed',error);
@@ -107,7 +107,7 @@ function applyRestock(row:InventoryRow){
 }
 
 export async function inventoryForStore(storeId:string){
-  const db=getSupabaseAdmin();
+  const db:any=getSupabaseAdmin();
   try {
     let {data,error}=await db.from('qz_inventory').select('store_id,product_id,stock,base_stock,restock_at').eq('store_id',storeId);
     if(error)fail('Inventory lookup failed',error);
@@ -132,7 +132,7 @@ export async function inventoryForStore(storeId:string){
 }
 
 export async function createPaymentSession(userId:string,input:{storeId:string;mode:'pickup'|'delivery';items:{id:string;qty:number}[]}){
-  const db=getSupabaseAdmin();
+  const db:any=getSupabaseAdmin();
   const store=stores.find(s=>s.id===input.storeId);
   if(!store)throw new Error('Store not found.');
   if(!input.items?.length)throw new Error('Your cart is empty.');
@@ -165,14 +165,14 @@ export async function createPaymentSession(userId:string,input:{storeId:string;m
 }
 
 export async function getPaymentSession(id:string){
-  const db=getSupabaseAdmin();
+  const db:any=getSupabaseAdmin();
   const {data,error}=await db.from('qz_payments').select('*').eq('id',id).maybeSingle();
   if(error)fail('Payment session lookup failed',error);
   return data?toPayment(data as PaymentRow):null;
 }
 
 export async function completePayment(id:string,userId:string){
-  const db=getSupabaseAdmin();
+  const db:any=getSupabaseAdmin();
   try {
     const payment=await getPaymentSession(id);
     if(!payment)throw new Error('Payment session not found.');
@@ -212,7 +212,7 @@ export async function completePayment(id:string,userId:string){
 }
 
 export async function listOrders(userId:string){
-  const db=getSupabaseAdmin();
+  const db:any=getSupabaseAdmin();
   const {data,error}=await db.from('qz_orders').select('*').eq('user_id',userId).order('created_at',{ascending:false});
   if(error)fail('Order lookup failed',error);
   return (data??[]).map(x=>toOrder(x as OrderRow));

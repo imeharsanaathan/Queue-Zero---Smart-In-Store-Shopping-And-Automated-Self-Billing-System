@@ -1,6 +1,6 @@
 import { createClient } from '@supabase/supabase-js';
 
-let cached: ReturnType<typeof createClient> | null = null;
+let cached: ReturnType<typeof createClient<any>> | null = null;
 
 export function getSupabaseAdmin() {
   if (cached) return cached;
@@ -9,7 +9,7 @@ export function getSupabaseAdmin() {
   if (!url || !key) {
     throw new Error('Supabase is not configured. Add SUPABASE_URL and SUPABASE_SECRET_KEY to the environment variables.');
   }
-  cached = createClient(url, key, {
+  cached = createClient<any>(url, key, {
     auth: { autoRefreshToken: false, persistSession: false },
     global: { headers: { 'X-Client-Info': 'queuezero-college-demo' } },
   });
