@@ -22,7 +22,7 @@ export default function Home({user,city,store}:{user:{id:string;name:string;emai
   const [selectedProduct,setSelectedProduct]=useState<Product|null>(null);
   useEffect(()=>{setCity(city);setStore(store)},[city.id,store.id]);
   useEffect(()=>{let alive=true;fetch(`/api/favorites?storeId=${encodeURIComponent(store.id)}`).then(r=>r.ok?r.json():null).then(d=>{if(alive&&d?.ok)setFavorites(d.productIds||[])}).catch(()=>{});return()=>{alive=false}},[store.id,setFavorites]);
-  const featured=useMemo(()=>productsForStore(store).filter(p=>p.bestSeller).slice(0,4),[store.id]);
+  const featured=useMemo(()=>{const pool=productsForStore(store);const best=pool.filter(p=>p.bestSeller);return (best.length?best:pool).slice(0,4)},[store.id]);
   return <div className="min-h-screen bg-[#f7f9fc]">
     <SiteHeader user={user} onCart={()=>router.push('/cart')}/>
     <main className="mx-auto max-w-[1560px] px-3 pb-24 sm:px-5">
@@ -57,12 +57,12 @@ export default function Home({user,city,store}:{user:{id:string;name:string;emai
           <div className="min-w-0"><Badge tone="amber">BEST SELLERS</Badge><h2 className="mt-2 whitespace-normal break-normal text-xl font-black leading-tight sm:text-2xl">Popular at {store.name}</h2></div>
           <div className="shrink-0 text-[10px] font-bold text-slate-400 sm:text-xs">4 outlet picks</div>
         </div>
-        <div className="grid grid-cols-3 gap-2 sm:grid-cols-2 sm:gap-3 lg:grid-cols-4">
-          {featured.map(p=><button key={p.id} type="button" onClick={()=>setSelectedProduct(p)} className="min-w-0 rounded-2xl border border-slate-200 bg-white p-2.5 text-left shadow-sm sm:p-4">
-            <div className="rounded-xl bg-gradient-to-br from-slate-50 to-emerald-50 p-2.5 sm:rounded-2xl sm:p-4">
-              <div className="text-[9px] font-black uppercase tracking-[.12em] text-blue-600 sm:text-[10px] sm:tracking-[.18em]">Product name</div>
-              <div className="mt-2 whitespace-normal break-normal text-[11px] font-black leading-4 sm:text-base sm:leading-5">{p.name}</div>
+        <div className="grid grid-cols-2 gap-2 sm:grid-cols-2 sm:gap-3 lg:grid-cols-4">
+          {featured.map(p=><button key={p.id} type="button" onClick={()=>setSelectedProduct(p)} className="min-w-0 rounded-2xl border border-slate-200 bg-white p-2.5 text-left shadow-sm transition hover:-translate-y-0.5 hover:border-emerald-200 hover:shadow-lg sm:p-4">
+            <div className="qz-featured-image-box rounded-xl bg-gradient-to-br from-slate-50 to-emerald-50 p-1.5 sm:rounded-2xl sm:p-2.5">
+              {p.image?<img src={p.image} alt={p.name} loading="lazy" decoding="async" className="qz-featured-image"/>:<div className="grid h-full w-full place-items-center text-[10px] font-black text-slate-300">Product image</div>}
             </div>
+            <div className="mt-2 qz-word-safe whitespace-normal break-normal text-[11px] font-black leading-4 sm:mt-3 sm:text-base sm:leading-5">{p.name}</div>
             <div className="mt-2 flex min-w-0 flex-wrap items-center justify-between gap-1.5 sm:mt-3">
               <div className="text-base font-black sm:text-lg">{money(p.price)}</div>
               <Badge tone="green" className="shrink-0">{p.stock} available</Badge>
