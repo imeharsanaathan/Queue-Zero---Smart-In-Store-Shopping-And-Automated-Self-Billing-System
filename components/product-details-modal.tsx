@@ -12,7 +12,7 @@ export function ProductDetailsModal({product,onClose,onAdd}:{product:Product|nul
     <div className="relative max-h-[92vh] w-full max-w-lg overflow-y-auto rounded-3xl bg-white shadow-2xl" onClick={e=>e.stopPropagation()}>
       <button type="button" aria-label="Close product details" onClick={onClose} className="absolute right-3 top-3 z-10 grid h-10 w-10 place-items-center rounded-full bg-white/95 shadow ring-1 ring-slate-200"><X className="h-5 w-5"/></button>
       <div className="bg-gradient-to-br from-yellow-50 via-white to-emerald-50 p-5 sm:p-7">
-        {product.image?<img src={product.image} alt={product.name} className="mx-auto block h-52 w-full max-w-sm rounded-2xl object-contain shadow-sm"/>:<div className="grid h-52 place-items-center rounded-2xl bg-white text-sm font-black text-slate-400">Product image</div>}
+        {product.image?<img src={product.image} alt={product.name} className="qz-product-detail-image mx-auto block h-full w-full max-w-lg rounded-2xl object-contain shadow-sm"/>:<div className="grid h-52 place-items-center rounded-2xl bg-white text-sm font-black text-slate-400">Product image</div>}
         <div className="mt-5 flex flex-wrap items-center gap-2">
           <span className="rounded-full bg-slate-950 px-3 py-1 text-[10px] font-black uppercase tracking-wider text-white">{product.brand}</span>
           {product.bestSeller&&<Badge tone="amber">Best Seller</Badge>}

@@ -27,3 +27,16 @@
 .qz-media-box{position:relative;min-width:0;overflow:hidden;isolation:isolate;}
 .qz-media-box img{display:block;max-width:100%;height:100%;width:100%;object-fit:contain;}
 img{max-width:100%;}
+
+/* Adaptive visual asset sizing: source images are tightly cropped, so the same master can fill the available box without distortion. */
+.qz-logo-box{height:clamp(104px,18vw,160px);padding:clamp(6px,1.2vw,14px);}
+.qz-store-logo,.qz-city-image,.qz-product-image{display:block;width:100%;height:100%;object-fit:contain;object-position:center;}
+.qz-city-image-box{height:clamp(104px,18vw,150px);padding:clamp(4px,1vw,10px);}
+.qz-product-image-box{height:clamp(168px,24vw,250px);padding:clamp(6px,1.5vw,16px);}
+.qz-product-detail-image{min-height:280px;max-height:62vh;}
+@media(max-width:767px){
+  .qz-logo-box{height:clamp(104px,29vw,150px);padding:8px;}
+  .qz-city-image-box{height:clamp(104px,29vw,146px);padding:5px;}
+  .qz-product-image-box{height:clamp(165px,42vw,220px);padding:8px;}
+  .qz-product-detail-image{min-height:240px;max-height:52vh;}
+}

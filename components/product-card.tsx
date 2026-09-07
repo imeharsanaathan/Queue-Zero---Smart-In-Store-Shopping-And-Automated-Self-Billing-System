@@ -33,8 +33,8 @@ export function ProductCard({product,onCompare}:{product:Product;onCompare:(p:Pr
   return <>
     <motion.div whileHover={{y:-4}} className="group min-w-0 overflow-visible rounded-2xl border border-slate-200 bg-white shadow-sm transition hover:border-blue-200 hover:shadow-xl">
       <div role="button" tabIndex={0} onClick={()=>setDetailsOpen(true)} onKeyDown={e=>{if(e.key==='Enter'||e.key===' ')setDetailsOpen(true)}} className="block w-full min-w-0 cursor-pointer text-left" aria-label={`View details for ${product.name}`}>
-        <div className="relative flex h-[150px] min-w-0 items-center justify-center overflow-hidden bg-gradient-to-br from-yellow-50 via-white to-emerald-50 p-2 sm:h-[210px] sm:p-4">
-          {product.image?<img src={product.image} alt="" loading="lazy" decoding="async" className="h-full w-full object-contain"/>:<div className="grid h-full w-full place-items-center rounded-xl bg-white/70 text-[10px] font-black text-slate-300">Product image</div>}
+        <div className="qz-product-image-box relative flex min-w-0 items-center justify-center overflow-hidden bg-gradient-to-br from-yellow-50 via-white to-emerald-50">
+          {product.image?<img src={product.image} alt="" loading="lazy" decoding="async" className="qz-product-image max-h-full max-w-full object-contain"/>:<div className="grid h-full w-full place-items-center rounded-xl bg-white/70 text-[10px] font-black text-slate-300">Product image</div>}
           <div className="absolute right-1.5 top-1.5 flex max-w-[55%] flex-wrap justify-end gap-1 sm:right-3 sm:top-3 sm:max-w-[75%] sm:gap-2">
             {product.bestSeller&&<Badge tone="amber">Best Seller</Badge>}
             {d>0&&<Badge tone="green">-{d}%</Badge>}
