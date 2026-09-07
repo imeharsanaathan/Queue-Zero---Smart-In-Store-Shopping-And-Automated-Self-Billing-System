@@ -1,0 +1,2 @@
+import {cookies} from 'next/headers'; import {redirect} from 'next/navigation'; import {userFromSession} from '@/lib/db'; import {cities} from '@/lib/data'; import {CitySelector} from '@/components/city-selector';
+export default async function CityPage(){const c=await cookies();if(!(await userFromSession(c.get('qz_session')?.value)))redirect('/login');return <main className="min-h-screen bg-gradient-to-br from-yellow-50 via-white to-emerald-50 p-5"><CitySelector cities={cities}/></main>}

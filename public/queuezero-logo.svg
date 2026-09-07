@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 470 110" role="img" aria-labelledby="title desc">
+  <title id="title">Queue Zero</title>
+  <desc id="desc">Queue Zero logo with aligned bright Q and lightning bolt side by side</desc>
+  <defs>
+    <linearGradient id="q" x1="15" y1="10" x2="95" y2="100" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#00E5FF"/><stop offset="0.45" stop-color="#2563EB"/><stop offset="1" stop-color="#7C3AED"/>
+    </linearGradient>
+    <linearGradient id="bolt" x1="95" y1="8" x2="155" y2="102" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#FFE600"/><stop offset="0.45" stop-color="#FF9D00"/><stop offset="1" stop-color="#FF3D81"/>
+    </linearGradient>
+    <linearGradient id="word" x1="175" y1="22" x2="400" y2="88" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#2563EB"/><stop offset="0.55" stop-color="#7C3AED"/><stop offset="1" stop-color="#EC4899"/>
+    </linearGradient>
+    <filter id="glow" x="-40%" y="-40%" width="180%" height="180%">
+      <feDropShadow dx="0" dy="4" stdDeviation="5" flood-color="#2563EB" flood-opacity=".22"/>
+    </filter>
+  </defs>
+  <circle cx="55" cy="55" r="39" fill="none" stroke="url(#q)" stroke-width="15" filter="url(#glow)"/>
+  <path d="M79 78 L96 96" fill="none" stroke="#2563EB" stroke-width="11" stroke-linecap="round"/>
+  <!-- Single continuous lightning bolt in the exact ⚡ visual form. -->
+  <text x="78" y="92" font-family="Segoe UI Symbol, Segoe UI, Arial Unicode MS, Noto Sans Symbols, sans-serif" font-size="92" font-weight="900" fill="url(#bolt)" filter="url(#glow)">⚡</text>
+  <text x="156" y="70" font-family="Inter,Segoe UI,Arial,sans-serif" font-size="43" font-weight="900" letter-spacing="-1.5" fill="url(#word)">Queue Zero</text>
+</svg>

@@ -1,0 +1,30 @@
+# Dependencies
+node_modules/
+.pnp/
+.pnp.js
+
+# Next.js / build
+.next/
+out/
+dist/
+build/
+coverage/
+
+# Local environment / secrets
+.env
+.env.*
+!.env.example
+
+# Vercel/local tooling
+.vercel/
+.turbo/
+
+# IDE / OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Logs / caches
+*.log
+.cache/
